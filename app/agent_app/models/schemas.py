@@ -5,6 +5,4 @@ class QueryRequest(BaseModel):
     query: str
 
 class QueryResponse(BaseModel):
-    intent: str
     response: str
-    status: str

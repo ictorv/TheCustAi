@@ -21,22 +21,22 @@ app.add_middleware(
 @app.post("/handle_incident", response_model=QueryResponse)
 def handle_incident(request: QueryRequest):
     
-    # Step 1: Classify Category (Intent)
+    # 1-- classify Category
     category = classify_intent(request.query)
 
-    # Step 2: Fetch User / CI Data
+    # 2-- fetch User
     user_data = fetch_user_data(request.user_id)
 
-    # Step 3: Generate AI response preview (for checking confidence)
+    # 3-- generate ai response preview (for checking confidence)
     response_preview = generate_response(request.query, category, user_data)
 
-    # Step 4: Decide Assignment, Priority, State
+    # 4-- decide assignment, priority, state
     assignment_group, priority, state = decide_action(category, request.query, response_preview)
 
-    # Step 5: Generate Final Response
+    # 5-- generate final response
     final_response = generate_response(request.query, category, user_data, priority)
 
-    # Step 6: If escalated, clearly indicate admin involvement
+    # 6-- if escalated--indicate admin involvement
     if state == "Escalated" and category == "unknown":
         final_response += "\nThis query could not be automatically resolved and has been escalated to a human admin."
 

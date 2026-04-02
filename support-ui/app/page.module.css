@@ -48,6 +48,41 @@
     z-index: 0;
 }
 
+/* ── Floating paw decorations ── */
+.pawDecorTL {
+    position: fixed;
+    top: 80px;
+    left: 260px;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(-15deg);
+    animation: floatPaw 6s ease-in-out infinite;
+}
+
+.pawDecorBR {
+    position: fixed;
+    bottom: 120px;
+    right: 40px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(20deg);
+    animation: floatPaw 8s ease-in-out infinite reverse;
+}
+
+@keyframes floatPaw {
+
+    0%,
+    100% {
+        transform: rotate(-15deg) translateY(0);
+    }
+
+    50% {
+        transform: rotate(-15deg) translateY(-8px);
+    }
+}
+
 .layout {
     display: flex;
     min-height: 100vh;
@@ -86,16 +121,27 @@
     gap: 10px;
 }
 
-.brandIcon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: var(--accent-dim);
-    border: 1px solid rgba(56, 189, 248, 0.2);
+/* Robo cat in sidebar brand */
+.brandCatWrap {
+    width: 52px;
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    animation: catBob 3s ease-in-out infinite;
+}
+
+@keyframes catBob {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
 }
 
 .brandName {
@@ -161,6 +207,9 @@
     letter-spacing: 0.1em;
     color: var(--text-3);
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .pipeline {
@@ -397,6 +446,7 @@
     font-size: 0.82rem;
     font-weight: 500;
     color: var(--text-1);
+    flex-wrap: wrap;
 }
 
 .sectionIndex {
@@ -406,6 +456,21 @@
     padding: 2px 6px;
     border: 1px solid var(--border-hi);
     border-radius: 4px;
+}
+
+/* Cat chip inside section title */
+.catChip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: auto;
+    font-size: 0.68rem;
+    color: var(--text-3);
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 10px 3px 6px;
+    font-family: var(--mono);
 }
 
 /* ══════════════════════════════
@@ -636,7 +701,7 @@
 .metaItem {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
     padding: 10px 16px;
     flex: 1;
 }
@@ -653,6 +718,9 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text-3);
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .metaVal {
@@ -664,6 +732,19 @@
 .metaMono {
     font-family: var(--mono);
     font-size: 0.78rem;
+}
+
+/* Decision color variants */
+.metaDecision_amber {
+    color: var(--amber);
+}
+
+.metaDecision_green {
+    color: var(--green);
+}
+
+.metaDecision_accent {
+    color: var(--accent);
 }
 
 /* Escalation banner */
@@ -696,6 +777,19 @@
     background: var(--bg-2);
 }
 
+.responseCardHeaderLeft {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.responseCardCatIcon {
+    display: flex;
+    align-items: center;
+    opacity: 0.85;
+    animation: catBob 3s ease-in-out infinite;
+}
+
 .responseCardLabel {
     font-family: var(--mono);
     font-size: 0.68rem;
@@ -716,6 +810,37 @@
     background: var(--border-hi);
 }
 
+/* ── Subject row ── */
+.subjectRow {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-2);
+}
+
+.subjectKey {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-3);
+    flex-shrink: 0;
+    padding: 2px 8px;
+    border: 1px solid var(--border-hi);
+    border-radius: 4px;
+}
+
+.subjectVal {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-1);
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+}
+
+/* ── Response body ── */
 .responseBody {
     padding: 1.25rem 1.5rem;
     display: flex;
@@ -822,5 +947,15 @@
 
     .content {
         padding: 1.25rem;
+    }
+
+    .subjectRow {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .pawDecorTL,
+    .pawDecorBR {
+        display: none;
     }
 }
